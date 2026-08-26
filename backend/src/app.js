@@ -13,8 +13,8 @@ if (process.env.NODE_ENV !== 'test') {
   app.use(morgan('dev'));
 }
 
-app.get('/health', (req, res) => res.json({ status: 'ok' }));
-app.use('/telemetry', telemetryRouter);
+app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
+app.use('/api/telemetry', telemetryRouter);
 
 app.use(notFoundHandler);
 app.use(errorHandler);

@@ -42,7 +42,7 @@ Data is stored in an in-memory array (`src/models/telemetryStore.js`), seeded
 with a few sample entries on startup. Data persists for the lifetime of the
 process and resets on restart.
 
-### `GET /telemetry`
+### `GET /api/telemetry`
 
 Returns all telemetry entries. Supports optional query parameters:
 
@@ -65,7 +65,7 @@ With `?page=1&limit=10`:
 }
 ```
 
-### `POST /telemetry`
+### `POST /api/telemetry`
 
 Creates a new entry. Body:
 
@@ -87,11 +87,11 @@ Validation (400 with a `details` array on failure):
 
 Returns `201` with the created entry (including a generated `id`).
 
-### `GET /telemetry/:id`
+### `GET /api/telemetry/:id`
 
 Returns a single entry, or `404` if the id doesn't exist.
 
-### `DELETE /telemetry/:id`
+### `DELETE /api/telemetry/:id`
 
 Deletes an entry, returning `204` on success or `404` if the id doesn't exist.
 
@@ -104,3 +104,7 @@ Deletes an entry, returning `204` on success or `404` if the id doesn't exist.
   spec only gives examples ("healthy", "critical") rather than a closed list.
 - Pagination is opt-in: omitting `page`/`limit` returns the full filtered
   list, keeping the simple case simple while satisfying the bonus requirement.
+- Routes are mounted under `/api` (e.g. `/api/telemetry`) rather than at the
+  root, so the same paths work behind the `/api/*` rewrite in the repo-root
+  [`vercel.json`](../vercel.json) when deployed alongside the frontend as a
+  second Vercel service.

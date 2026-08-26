@@ -11,8 +11,11 @@ npm install
 npm run dev       # http://localhost:5173
 ```
 
-By default the app talks to the backend at `http://localhost:3001`. To point
-it elsewhere, copy `.env.example` to `.env` and set `VITE_API_URL`.
+The app calls the relative `/api` path by default. In dev, Vite proxies
+`/api` to `http://localhost:3001` (see `vite.config.js`); in production,
+`vercel.json` rewrites `/api/*` to the backend service. If the backend is
+hosted on a different origin, copy `.env.example` to `.env` and set
+`VITE_API_URL` to override it.
 
 Make sure the backend is running first (see `../backend/README.md`).
 

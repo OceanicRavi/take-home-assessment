@@ -1,4 +1,6 @@
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+// Relative by default: same-origin `/api` is rewritten to the backend service
+// in production (see vercel.json) and proxied to it in dev (see vite.config.js).
+const API_URL = import.meta.env.VITE_API_URL || '/api';
 
 async function handleResponse(res) {
   if (!res.ok) {
